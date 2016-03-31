@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    
+    function User(name) {this.name = name;}
+    var user = new User("zhangsan");
+
+
+    // // 1. typeof
+    // // Good for primitives and functions, it lies about null.
+    // console.log(typeof 0); // number
+    // console.log(typeof "0"); // string
+    // console.log(typeof false); // boolean
+    // console.log(typeof null); // object
+    // console.log(typeof undefined); // undefined
+    // console.log(typeof {}); // object
+    // console.log(typeof []); // object
+    // console.log(typeof function(){});  // function
+    // console.log(typeof new Date());  // object
+    // console.log(typeof user); // object
+
+    // // # typeof null为object，这是js设计错误，但为兼容性没有改正
+    // // # typeof无法区分数组、对象、自定义对象，都是返回object
+
+
+    // // 2. [[Class]]
+    // // Exposed through {}.toString. Good for built-in object and primitives, excepts null and undefined.
+    // var toClass = {}.toString;
+
+    // console.log(toClass.call(0)); // [object Number]
+    // console.log(toClass.call("0")); // [object String]
+    // console.log(toClass.call(true)); // [object Boolean]
+    // console.log(toClass.call(null)); // 高版本浏览器[object Null]，低版本浏览器如IE8[object Object]
+    // console.log(toClass.call(undefined)); // 高版本浏览器[object Undefined]，低版本浏览器如IE8[object Object]
+    // console.log(toClass.call({})); // object Object]
+    // console.log(toClass.call([])); // [object Array]
+    // console.log(toClass.call(function(){})); // [object Function]
+    // console.log(toClass.call(new Date())); // [object Date]
+    // console.log(toClass.call(user)); // [object Object]
+
+    // // Fortunately, there is a hidden [[Class]] property in all JavaScript native objects. It equals “Array” for arrays, “Date” for dates etc.
+
+    // // This property is not accessible directly, but toString, borrowed from native Object returns it with a small wrapping
+
+    // 3. instanceof
+    // Works for custom objects. Can be used for native objects too, but lies if they come from another frame/window.
+    console.log(0 instanceof Number); // false
+    console.log("0" instanceof String); // false
+    console.log(null instanceof Object); // false
+    console.log(undefined instanceof Object); // false
+    console.log({} instanceof Object); // true
+    console.log([] instanceof Object); // true
+    console.log([] instanceof Array); // true
+    console.log(function func() {} instanceof Function); // true
+    console.log(new Date() instanceof Date); // true
+    console.log(user instanceof User); // true
+
+    // # instanceof 一般用来检测自定义对象
+    // # 可以用来检测原生对象，但是如果被检测的对象如果是跨越了多个frame/window，则无法检测。所以对于原生对象，一般使用[[Class]]方法来检测类型
+  </script>
+</head>
+<body>
+  Summary
+
+  typeof
+  Good for primitives and functions, it lies about null.
+
+  [[Class]]
+  Exposed through {}.toString. Good for built-in object and primitives, excepts null and undefined.
+
+  instanceof
+  Works for custom objects. Can be used for native objects too, but lies if they come from another frame/window.
+</body>
+</html>
