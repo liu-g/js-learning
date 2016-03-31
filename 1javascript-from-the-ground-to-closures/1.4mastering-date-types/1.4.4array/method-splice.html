@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,3 +54,60 @@
 </body>
 
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    /*
+        An object has a className property which keeps it’s class names delimited by spaces:
+        var obj = {
+          className: 'open menu'
+        }
+        Write a function removeClass(obj, cls) which removes a class cls if it is set:
+        removeClass(obj, 'open') // obj.className='menu'
+        removeClass(obj, 'blabla')  // no changes (no class to remove)
+
+        */
+
+        function removeClass(obj, cls) {
+          for (var classNames = obj.className.split(" "), i = classNames.length - 1; i >= 0; i--) {
+            if (classNames[i] === cls) {
+              // 错误！ splice方法返回的是被删除的元素数组
+              // obj.className = classNames.splice(i, 1).join(" ");
+              // splice方法后，原数组改变了
+
+              classNames.splice(i, 1);
+
+              // 错误！ className中可能有多个重复的cls，所以循环要继续
+              // return;
+            }
+          }
+
+          // for循环后再改变obj.className
+          // 注意：js中变量的作用域是函数范围内都有效，所以classNames此时有效
+          obj.className = classNames.join(" ");
+        }
+
+        var obj = {
+          className: "open menu"
+        };
+
+        removeClass(obj, "open");
+
+        console.log(obj);
+
+        removeClass(obj, 'blabla')
+
+        console.log(obj);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
+>>>>>>> 76ca8820da7b99f6b1e07e7f9c636d04f0a35148

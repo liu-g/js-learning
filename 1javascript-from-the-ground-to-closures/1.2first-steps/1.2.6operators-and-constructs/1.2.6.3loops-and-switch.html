@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,4 +63,70 @@
 <body>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loops and switch | JavaScript Tutorial</title>
+    <script>
+    // A number is prime if it has exactly two divisors: 1 and itself.
+  
+    //Or, in other words, n>1 is prime if numbers 2..n-1 all divide n with a non-zero remainder.
+
+    //Create a code which outputs all primes less than 10. There should be 2,3,5,7.
+
+    //P.S. The code should also work if 100, 1000, any other value in place of 10.
+
+    // 素数（也叫质数）：只能被1和自身整除的整数为素数
+
+
+    // function isPrimeNumber(num) {
+    //     for (var i = 2; i < num; i++) {
+    //         // 这里通过判断商是否为整数来判断是否被整除
+    //         // 绕弯了！
+    //         // 直接判断余数是否为0就可以
+    //         // if (isInteger(num / i)) {
+    //         if (num % i === 0) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // function isInteger(num) {
+    //     return isNumeric(num) && ("" + parseFloat(num)).indexOf(".") === -1;
+    // }
+
+    // function isNumeric(num) {
+    //     return !isNaN(parseFloat(num)) && isFinite(num);
+    // }
+
+
+    // var prime = [];
+    // for (var i = 1; i < 10; i++) {
+    //     if (isPrimeNumber(i)) {
+    //         prime.push(i);
+    //     }
+
+    // }
+    // console.log(prime);
+
+    // 参考答案
+    next_prime:
+    for (var i = 2; i < 10; i++) {
+      for (var j = 2; j < i; j++) {
+        if (i % j === 0) continue next_prime;
+      }
+
+      alert(i);
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+>>>>>>> 76ca8820da7b99f6b1e07e7f9c636d04f0a35148
 </html>

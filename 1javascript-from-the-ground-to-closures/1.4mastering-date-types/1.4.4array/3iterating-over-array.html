@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,4 +51,58 @@
 <body>
   
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Iterating over array</title>
+<script>
+    // // Create a function find(arr,value) which finds a value in given array and returns its index, or -1 if not found.
+
+    // function find(arr, value) {
+    //   if (Array.indexOf) return arr.indexOf(value);
+
+    //   for (var i = 0; i < arr.length; i++) {
+    //     if (arr[i] === value) return i;
+    //   }
+    //   return -1;
+    // }
+
+    // arr = [ "test", 2, 1.5, false ]
+
+    // console.log(find(arr, "test")) // 0
+    // console.log(find(arr, 2)) // 1
+    // console.log(find(arr, 1.5)) // 2
+    // console.log(find(arr, 0)) // -1
+
+  </script>
+
+  <script>
+    // Create a function filterNumeric(arr) which takes an array and returns new array which contains only numeric values from arr.
+    function isNumeric(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    function filterNumeric(arr) {
+      var arr2 = [];
+
+      for (var i = 0; i < arr.length; i++) {
+        if (isNumeric(arr[i])) arr2.push(arr[i]);
+      }
+
+      return arr2;
+    }
+
+    arr = ["a", 1, "b", 2];
+
+    arr = filterNumeric(arr);
+    console.log(arr);
+    // now arr = [1,2]
+  </script>
+</head>
+<body>
+  
+</body>
+>>>>>>> 76ca8820da7b99f6b1e07e7f9c636d04f0a35148
 </html>
