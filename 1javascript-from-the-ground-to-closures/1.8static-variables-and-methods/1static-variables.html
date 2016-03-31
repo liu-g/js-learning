@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static variables</title>
+  <script>
+    function func() {
+      func.count = ++func.count || 1;
+      console.log("Call no " + func.count);
+    }
+
+    func();
+    func();
+
+    // 改进。这样函数重名后静态变量不用改动
+    function func2() {
+      arguments.callee.count = ++ arguments.callee.count || 1;
+      console.log("call no " + arguments.callee.count);
+    }
+
+    func2();
+    func2();
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

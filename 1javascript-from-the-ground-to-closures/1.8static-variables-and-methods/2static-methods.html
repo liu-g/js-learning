@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static method</title>
+  <script>
+    function Obj(name) {
+      arguments.callee.count = ++ arguments.callee.count || 1;
+      this.name = name;
+    }
+
+    Obj.showCount = function() {
+      alert(Obj.count);
+    }
+
+    var a1 = new Obj("aaa");
+    var a2 = new Obj("2222");
+    Obj.showCount(); 
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

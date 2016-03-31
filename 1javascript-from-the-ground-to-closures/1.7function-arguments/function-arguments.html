@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Function arguments</title>
+  <script>
+    // JavaScript中的方法中可以使用个一个叫arguments的东西
+    // arguments类似数组，保存了所有传递给方法的参数
+  </script>
+
+  <script>
+    function getMax(arr) {
+      return Math.max.apply(Math, arr);
+    }
+
+    console.log(getMax([1, 2, 3, 100, 4, 5]));
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
