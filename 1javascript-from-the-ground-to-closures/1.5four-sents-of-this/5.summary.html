@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Summary</title>
+</head>
+<body>
+  As method
+obj.func(...)    // this = obj
+obj["func"](...)
+
+As function
+func(...)        // this = window
+
+In new
+new func()       // this = {} (new object)
+
+call/apply
+func.call(context, arg1, arg2, ...)  // this = context
+func.apply(context, [args])
+
+</body>
+</html>
