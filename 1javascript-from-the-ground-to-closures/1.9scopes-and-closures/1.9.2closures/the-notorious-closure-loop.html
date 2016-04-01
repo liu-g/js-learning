@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    // // 闭包的一个循环问题
+    // function makeArmy() {
+    //   var shooters = [],
+    //     i = 0,
+    //     len = 10;
+
+    //   for ( ; i < len; i++ ) {
+    //     var shooter = function() {
+    //       alert(i);
+    //     }
+
+    //     shooters.push( shooter );
+    //   }
+
+    //   return shooters;
+    // }
+
+    // var army = makeArmy();
+    // army[0](); // 10，预期的是0
+    // army[5](); // 10, 预期的是5
+
+    // Why all shooters alert the same? How to make each shooter output it’s number?
+
+    // Solution
+    // Note that the shooter function. Does not have a variable named i.
+
+    // So, when it is called, the interpreter takes i from the outer LexicalEnvironment.
+
+    // The problem is that at the time when shooters are run, function makeArmy has already finished the execution.
+
+    // The loop has finished and the variable i is now 10.
+
+    // There are two possible solutions.
+
+    // The first one is to put the correct value into the shooting function itself.
+
+    // function makeArmy() {
+    //   var shooters = [],
+    //     i = 0,
+    //     len = 10;
+
+    //   for ( ; i < len; i++ ) {
+    //     var shooter = function() {
+    //       alert(arguments.callee.i);
+    //     }
+
+    //     shooter.i = i;
+
+    //     shooters.push(shooter);
+    //   }
+
+    //   return shooters;
+    // }
+
+    // var army = makeArmy();
+    // army[0]();
+    // army[5]();
+
+    // Another, more advanced solution is to use an extra function to trap the current value of i:
+    // function makeArmy() {
+    //   var shooters = [],
+    //     i = 0,
+    //     len = 10;
+
+    //   for ( ; i < len; i++ ) {
+    //     var shooter = function( i ) {
+    //       return function() {
+    //         alert(i);
+    //       }
+    //     }(i);
+
+    //     shooters.push(shooter);
+    //   }
+
+    //   return shooters;
+    // }
+
+    // var army = makeArmy();
+    // army[0]();
+    // army[5]();
+
+    // Let’s consider the highlighted fragment more thoroughly.
+
+    // 1
+    // var shooter = function(i) {
+    // 2
+    //   return function() {
+    // 3
+    //     alert( i )
+    // 4
+    //   }
+    // 5
+    // }(i)
+    // Here, the actual shooting function is created as the result of an anonymous function(i) which is created and executed in one place.
+
+    // So, when it comes to executing alert(i), it will be taken from LexicalEnvironment of the anonymous function.
+
+    // So, the anonymous function traps current i into it’s LexicalEnvironment and allows the shooter to access it.
+
+    // The last way is to wrap the whole loop into temporary function. Sometimes that’s more readable:
+    // function makeArmy() {
+    //   var shooters = [],
+    //     i = 0,
+    //     len = 10;
+
+    //   for ( ; i < len; i++ ) {
+    //     (function(i) {
+    //       var shooter = function() {
+    //         alert(i);
+    //       }
+
+    //       shooters.push(shooter);
+    //     }(i));
+    //   }
+
+    //   return shooters;
+    // }
+
+    // var army = makeArmy();
+    // army[0]();
+    // army[5]();
+    // The (function(i) { ... }) definition is wrapped into brackets to make sure the interpreter treats that as expression.
+  </script>
+
+  <script>
+    // [[Scope]] for new Function
+    // There is an exception to general scope binding rule. When you create a function using new Function, it’s [[Scope]] points to window, not to current LexicalEnvironment.
+
+    // The following example demonstrates how a function, created with new Function ignores local variable a and outputs the global variable.
+
+    // The regular behavior:
+    // window.a = 1;
+    // function getFunc() {
+    //   var a = 2,
+    //     func = function() {
+    //       alert(a);
+    //     };
+
+    //   return func;
+    // }
+    // getFunc()();
+
+    // And now the function, created by new Function:
+
+    window.b = 3;
+    function getFunc2() {
+      var b = 4,
+        func2 = new Function("", "alert(b)");
+
+      return func2;
+    }
+    getFunc2()();
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

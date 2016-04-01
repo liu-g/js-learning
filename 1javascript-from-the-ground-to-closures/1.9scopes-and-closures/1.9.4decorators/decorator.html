@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decorator</title>
+  <script>
+    // function work(a,b) { /* arbitrary function */ }
+
+    // function makeLogging(f) {
+    //  /* your code */
+    //   var logs = [];
+      
+    //   function wrapper() {
+    //     logs.push(arguments);
+    //     f.call(this, arguments);
+    //   }
+
+    //   wrapper.outputLog = function() {
+    //     for (var i = 0; i < logs.length; i++) {
+    //       alert([].join.call(logs[i], ','));
+    //     }
+    //   }
+
+    //   return wrapper;
+    // }
+
+    // work = makeLogging(work)
+
+    // // now work should log it's calls somewhere (but not in global)
+    // work(1,2)
+    // work(5,6)
+    // work.outputLog() // <-- should alert('1,2'), alert('5,6')
+  </script>
+
+  <script>
+    function work(arg) {
+      return Math.random()*arg
+    }
+
+    function makeCaching(f) {
+     /* your code */
+
+      // 错误！ 传不同的参数结果肯定要不一样
+      //var cache = null;
+      var cache = {};
+
+      function wrapper(a) {
+        if (!(a in cache)) {
+          cache[a] = f.call(this, a);
+        }
+        return cache[a];
+      }
+
+      wrapper.flush = function() {
+        cache = {};
+      }
+
+      return wrapper;
+    }
+
+    work = makeCaching(work);
+
+    var a = work(1);
+    var b = work(1);
+    alert( a == b ) // true (cached)
+
+    work.flush()    // clears the cache
+
+    b = work(1)
+    alert( a == b ) // false
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

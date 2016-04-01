@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Closures</title>
+  <script>
+  /*
+Create a function sum that will work like that: sum(a)(b) = a+b.
+
+Yes, the syntax is dual brackets. Funny, isn’t it? For instance:
+sum(1)(2) = 3
+sum(5)(-1) = 4
+
+  */
+    // function sum(a) {
+    //   function add(b) {
+    //     return a + b;
+    //   }
+
+    //   return add;
+    // }
+
+    // alert(sum(1)(2));
+  </script>
+
+  <script>
+    /*
+Create a function sum that will work like that: sum(a)(b) = a+b and accepts any number of brackets.
+
+For instance:
+1
+sum(1)(2) == 3
+2
+sum(5)(-1)(2) == 6
+3
+sum(6)(-1)(-2)(-3) == 0
+4
+sum(0)(1)(2)(3)(4)(5) == 15
+
+    */
+
+    function sum(a) {
+      var s = a;
+
+      function add(b) {
+        s += b;
+
+        return add;
+      }
+
+      add.toString = function() {
+        return s;
+      }
+
+      return add;
+    }
+
+    alert(sum(1)(2)(3));
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

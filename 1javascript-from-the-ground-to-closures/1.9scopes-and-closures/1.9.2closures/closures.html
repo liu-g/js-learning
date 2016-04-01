@@ -4,58 +4,43 @@
   <meta charset="UTF-8">
   <title>Closures</title>
   <script>
-  /*
-Create a function sum that will work like that: sum(a)(b) = a+b.
+    // function outer(a) {
+    //   var b = 2;
 
-Yes, the syntax is dual brackets. Funny, isn’t it? For instance:
-sum(1)(2) = 3
-sum(5)(-1) = 4
-
-  */
-    // function sum(a) {
-    //   function add(b) {
-    //     return a + b;
+    //   function inner() {
+    //     console.log("in inner");
+    //     console.log(a);
+    //     console.log(b);
     //   }
 
-    //   return add;
+    //   return inner;
     // }
 
-    // alert(sum(1)(2));
+    // var x = outer(1);
+    // x();
+    // x();
   </script>
 
   <script>
-    /*
-Create a function sum that will work like that: sum(a)(b) = a+b and accepts any number of brackets.
+    function User(name) {
+      this.fixName = function() {
+        name = name.toUpperCase();
+      },
 
-For instance:
-1
-sum(1)(2) == 3
-2
-sum(5)(-1)(2) == 6
-3
-sum(6)(-1)(-2)(-3) == 0
-4
-sum(0)(1)(2)(3)(4)(5) == 15
-
-    */
-
-    function sum(a) {
-      var s = a;
-
-      function add(b) {
-        s += b;
-
-        return add;
+      this.sayHi = function() {
+        console.log("Hi I'm " + name);
       }
-
-      add.toString = function() {
-        return s;
-      }
-
-      return add;
     }
 
-    alert(sum(1)(2)(3));
+    var user = new User("John");
+    // (1)
+    user.fixName();
+    // (2)
+    user.sayHi();
+    
+    // Here user.fixName.[[Scope]] and user.say.[[Scope]] reference same LexicalEnvironment, which corresponds to new User run.
+
+    // From (1) to (2), the LexicalEnvironment.name is updated, so both functions see the variable change.
   </script>
 </head>
 <body>
